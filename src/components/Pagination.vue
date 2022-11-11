@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'Pagination',
   props: {
@@ -28,10 +26,7 @@ export default {
   },
   methods: {
     onClickSelectPage(page) {
-      this.$emit(
-        'currentPage',
-        axios.get(`https://rickandmortyapi.com/api/character?page=${page}`)
-      );
+      this.$emit('currentPage', page);
     },
   },
 };

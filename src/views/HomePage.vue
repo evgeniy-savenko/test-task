@@ -51,6 +51,7 @@ export default {
         .get('https://rickandmortyapi.com/api/character')
         .then((response) => {
           let paginationPages = response.data.info.pages;
+          console.log(response.data.results, 'запрос ориг');
           let characterInfo = response.data.results;
           this.characterInfo = characterInfo;
           this.paginationPages = paginationPages;
@@ -60,9 +61,13 @@ export default {
       this.favorites.push(id);
       this.favorites = this.favorites.filter((elem) => elem / 1);
     },
-    getCurrentPage(data) {
-      this.setCurrentPage = data;
-      console.log(this.setCurrentPage);
+    getCurrentPage(page) {
+      axios
+        .get(`https://rickandmortyapi.com/api/character?page=${page}`)
+        .then((response) => {
+          let characterInfo = response.data.results;
+          this.characterInfo = characterInfo;
+        });
     },
   },
 
